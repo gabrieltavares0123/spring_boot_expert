@@ -1,4 +1,4 @@
-package io.github.gabriel.rest;
+package io.github.gabriel.rest.controller;
 
 import io.github.gabriel.domain.entity.Cliente;
 import io.github.gabriel.domain.repository.ClienteRepository;
@@ -12,7 +12,7 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/clientes")
+@RequestMapping("/api/cliente")
 public class ClienteController {
 
     @Autowired
@@ -36,9 +36,9 @@ public class ClienteController {
     public void delete(@PathVariable Integer id) {
         clienteRepository
                 .findById(id)
-                .map(existing -> {
-                    clienteRepository.delete(existing);
-                    return existing;
+                .map(c -> {
+                    clienteRepository.delete(c);
+                    return Void.TYPE;
                 })
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Cliente não encontrado."));
     }
@@ -47,10 +47,10 @@ public class ClienteController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void update(@PathVariable Integer id, @RequestBody Cliente cliente) {
         clienteRepository.findById(id)
-                .map(existing -> {
-                    cliente.setId(existing.getId());
+                .map(c -> {
+                    cliente.setId(c.getId());
                     clienteRepository.save(cliente);
-                    return existing;
+                    return Void.TYPE;
                 }).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Cliente não encontrado."));
     }
 
