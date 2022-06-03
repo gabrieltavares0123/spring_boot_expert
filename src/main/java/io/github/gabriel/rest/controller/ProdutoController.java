@@ -1,7 +1,7 @@
 package io.github.gabriel.rest.controller;
 
 import io.github.gabriel.domain.entity.Produto;
-import io.github.gabriel.domain.repository.ProdutoRepository;
+import io.github.gabriel.data.repository.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;

@@ -2,7 +2,7 @@ package io.github.gabriel.rest.controller;
 
 import io.github.gabriel.domain.entity.Pedido;
 import io.github.gabriel.rest.dto.PedidoDto;
-import io.github.gabriel.service.PedidoService;
+import io.github.gabriel.domain.service.PedidoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;

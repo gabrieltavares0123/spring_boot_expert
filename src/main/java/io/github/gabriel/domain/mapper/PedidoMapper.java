@@ -1,4 +1,4 @@
-package io.github.gabriel.service.mapper;
+package io.github.gabriel.domain.mapper;
 
 import io.github.gabriel.domain.entity.Pedido;
 import io.github.gabriel.rest.dto.PedidoDto;

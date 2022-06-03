@@ -1,4 +1,4 @@
-package io.github.gabriel.domain.repository;
+package io.github.gabriel.data.repository;
 
 import io.github.gabriel.domain.entity.ItemPedido;
 import org.springframework.data.jpa.repository.JpaRepository;

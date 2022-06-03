@@ -1,16 +1,17 @@
-package io.github.gabriel.service;
+package io.github.gabriel.domain.service;
 
+import io.github.gabriel.core.base.exception.service.InvalidCodeException;
+import io.github.gabriel.core.base.exception.service.NoDataException;
 import io.github.gabriel.domain.entity.Cliente;
 import io.github.gabriel.domain.entity.ItemPedido;
 import io.github.gabriel.domain.entity.Pedido;
 import io.github.gabriel.domain.entity.Produto;
-import io.github.gabriel.domain.repository.ClienteRepository;
-import io.github.gabriel.domain.repository.ItemPedidoRepository;
-import io.github.gabriel.domain.repository.PedidoRepository;
-import io.github.gabriel.domain.repository.ProdutoRepository;
+import io.github.gabriel.data.repository.ClienteRepository;
+import io.github.gabriel.data.repository.ItemPedidoRepository;
+import io.github.gabriel.data.repository.PedidoRepository;
+import io.github.gabriel.data.repository.ProdutoRepository;
 import io.github.gabriel.rest.dto.ItemPedidoDto;
 import io.github.gabriel.rest.dto.PedidoDto;
-import io.github.gabriel.service.exception.ServiceException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -33,7 +34,10 @@ public class PedidoServiceImpl implements PedidoService {
         Integer idCliente = dto.getCliente();
         Cliente cliente = clienteRepository
                 .findById(idCliente)
-                .orElseThrow(() -> new ServiceException("Código de cliente inválido."));
+                .orElseThrow(() -> new InvalidCodeException(
+                        "S0001",
+                        "Código de cliente inválido: " + idCliente
+                ));
 
         Pedido pedido = new Pedido();
         pedido.setTotal(dto.getTotal());
@@ -51,7 +55,7 @@ public class PedidoServiceImpl implements PedidoService {
 
     private List<ItemPedido> convertItemsPedido(Pedido pedido, List<ItemPedidoDto> items) {
         if (items.isEmpty()) {
-            throw new ServiceException("Não é possível realizar um pedido sem itens.");
+            throw new NoDataException("S0002", "Não é possível realizar um pedido sem itens.");
         }
 
         return items
@@ -61,7 +65,8 @@ public class PedidoServiceImpl implements PedidoService {
                     Produto produto = produtoRepository
                             .findById(idProduto)
                             .orElseThrow(
-                                    () -> new ServiceException(
+                                    () -> new InvalidCodeException(
+                                            "S0003",
                                             "Código de produto inválido: " + idProduto
                                     ));
 

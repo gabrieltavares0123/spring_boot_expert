@@ -1,7 +1,7 @@
 package io.github.gabriel.rest.controller;
 
 import io.github.gabriel.domain.entity.Cliente;
-import io.github.gabriel.domain.repository.ClienteRepository;
+import io.github.gabriel.data.repository.ClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
