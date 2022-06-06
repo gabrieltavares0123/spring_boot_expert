@@ -1,5 +1,6 @@
 package io.github.gabriel.domain.entity;
 
+import io.github.gabriel.domain.enums.StatusPedido;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -32,4 +33,7 @@ public class Pedido {
 
     @OneToMany(mappedBy = "pedido")
     private List<ItemPedido> itens;
+
+    @Enumerated(EnumType.STRING)
+    private StatusPedido status;
 }

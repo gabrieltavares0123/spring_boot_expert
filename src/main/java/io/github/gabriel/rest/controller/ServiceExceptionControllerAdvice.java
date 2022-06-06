@@ -2,6 +2,7 @@ package io.github.gabriel.rest.controller;
 
 import io.github.gabriel.core.base.exception.service.InvalidCodeException;
 import io.github.gabriel.core.base.exception.service.NoDataException;
+import io.github.gabriel.core.base.exception.service.PedidoNotFoundException;
 import io.github.gabriel.core.base.response.ApiErrorResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -18,8 +19,13 @@ public class ServiceExceptionControllerAdvice {
     }
 
     @ExceptionHandler(NoDataException.class)
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseStatus(HttpStatus.OK)
     public ApiErrorResponse handleNoDataException(NoDataException ex) {
+        return new ApiErrorResponse(ex.getCode(), ex.getMessage());
+    }
+
+    @ExceptionHandler(PedidoNotFoundException.class)
+    public ApiErrorResponse handlePedidoNotFound(PedidoNotFoundException ex) {
         return new ApiErrorResponse(ex.getCode(), ex.getMessage());
     }
 }
